@@ -18,6 +18,7 @@ export const NavbarRoutes = () => {
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isCoursePage = pathname?.includes("/courses");
   const isSearchPage = pathname === "/search";
+  const isGuestPage = !userId;
 
   return (
     <>
@@ -41,6 +42,14 @@ export const NavbarRoutes = () => {
             </Button>
           </Link>
         ): null}
+        {isGuestPage && (
+          <Link href="/sign-in">
+            <Button size="sm" variant="ghost">
+             
+              Sign In
+            </Button>
+          </Link>
+        )}
         <UserButton 
           afterSignOutUrl="/"
         />

@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 interface CourseEnrollButtonProps {
     price: number;
@@ -18,6 +20,21 @@ courseId,
 }: CourseEnrollButtonProps) => {
     const [isLoading, setIsLoanidg] = useState(false);
 
+     const router = useRouter();
+    const { userId } = useAuth();
+
+
+    if (!userId) {
+        return (
+            <Button
+                onClick={() => router.push("/sign-in")}
+                size="sm"
+                className="w-full md:w-auto"
+            >
+                Login to purchase
+            </Button>
+        );
+    }
     const onClick = async () => {
         try {
             setIsLoanidg(true);
